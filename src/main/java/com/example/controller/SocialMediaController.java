@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Account;
+import com.example.entity.Message;
 import com.example.repository.AccountRepository;
 import com.example.service.AccountService;
 import com.example.service.MessageService;
@@ -70,8 +72,13 @@ public class SocialMediaController {
         if (loginDetails == null); {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  
         } 
-          return new ResponseEntity<>(loginDetails);
+         // Logic error return new ResponseEntity<>(loginDetails);
            
+    }
+
+    @GetMapping ("/messages")
+    public List <Message> retreiveAllMessages (Message message) {
+       return messageService.getAllMessages();
     }
 
 }
