@@ -47,9 +47,9 @@ public class MessageService {
 
         Optional<Message> findMessagefirst = messageRepository.findById(message_id);
 
-        if (findMessagefirst.isPresent() && !message_text.isEmpty() && message_text.length() < 255) {
-            return messageRepository.updateMessageTextById(message_text, message_id);
-        } return 0;
+        if (message_text.isBlank() || message_text.length() > 255 || !findMessagefirst.isPresent()){
+            return 0;
+        } return messageRepository.updateMessageTextById(message_text, message_id);
         
     }
 
