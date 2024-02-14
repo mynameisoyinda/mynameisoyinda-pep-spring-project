@@ -116,14 +116,18 @@ public class SocialMediaController {
     
     @PatchMapping ("/messages/{message_id}")
     public ResponseEntity <?> updateMessageById (@PathVariable int message_id, @RequestBody String message_text) {
-        int updatedRows = messageService.updateMessageById(message_id, message_text); 
-
-        if (!message_text.isBlank() || message_text.length() < 255 || updatedRows > 0) {
-            return new ResponseEntity<>(updatedRows, HttpStatus.OK);
-        }     
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            int updatedRows = messageService.updateMessageById(message_text, message_id);
+            if (updatedRows > 0) {
+                return new ResponseEntity<>(updatedRows, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+       
       
     }
+
+
+    
 
     @GetMapping ("/accounts/{account_id}/messages") 
     public ResponseEntity<List<Message>> getMessagesByUser (@PathVariable int account_id) {

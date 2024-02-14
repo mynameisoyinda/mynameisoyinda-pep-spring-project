@@ -29,7 +29,7 @@ public interface MessageRepository extends JpaRepository <Message, Integer> {
     @Transactional
     @Modifying
     @Query("UPDATE Message m SET m.message_text = ?1 WHERE m.message_id = ?2")
-    int updateMessageTextById(int message_id, String message_text);
+    int updateMessageTextById(@Param("message_text") String message_text, @Param ("message_id") int message_id);
 
     @Query ("SELECT m FROM Message m WHERE m.posted_by = ?1")
     List<Message> findByPostedBy(int posted_by);
