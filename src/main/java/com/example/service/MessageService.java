@@ -43,14 +43,11 @@ public class MessageService {
        return messageRepository.deleteById(messageId);
     }
 
-    public int updateMessageById (String message_text, int message_id) {
-
-        Optional<Message> findMessagefirst = messageRepository.findById(message_id);
-
-        if (message_text.isBlank() || message_text.length() > 255 || !findMessagefirst.isPresent()){
+    public int updateMessageById (int message_id, String message_text) {
+        if (message_text.isBlank() || message_text.length() > 255) {
             return 0;
-        } return messageRepository.updateMessageTextById(message_text, message_id);
-        
+        }
+        return messageRepository.updateMessageTextById(message_text, message_id);   
     }
 
     public List<Message> getAllMessagesByUser (int postedBy) {
